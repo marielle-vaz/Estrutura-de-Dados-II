@@ -4,7 +4,7 @@ import java.io.File;
 
 import javax.swing.JOptionPane;
 
-public class Main {
+public class Arquivos {
     public static void main(String[] args) {
        /* 
         File folder = new File("C:\\Users\\marie\\Desktop\\Instituto Federal Goiano - Campus Trindade"); // current directory
@@ -25,7 +25,9 @@ public class Main {
         System.out.println("Arquivo encontrado: " + encontrado);
 
         if(encontrado){
-            JOptionPane.showMessageDialog(null, "Encontrei " + qtde + " arquivo(s)", "ENCONTRADO", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Encontrei " + qtde + " arquivo(s)!", "ENCONTRADO", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Não encontrei nenhum arquivo!", "NÃO ENCONTRADO", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
