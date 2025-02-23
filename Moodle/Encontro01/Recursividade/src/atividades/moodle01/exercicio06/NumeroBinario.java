@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 public class NumeroBinario {
     public static void main(String[] args) {
         long numero = Long.parseLong(JOptionPane.showInputDialog("Informe um número"));
-        System.out.println("Número " + numero + " em binário: " + converterParaBinario(numero));
+        JOptionPane.showMessageDialog(null,"Número " + numero + " em binário: " + converterParaBinario(numero));
     }
 
     public static String converterParaBinario(long n) {

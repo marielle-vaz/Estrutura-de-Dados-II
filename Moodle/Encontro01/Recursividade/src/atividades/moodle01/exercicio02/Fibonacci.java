@@ -6,7 +6,7 @@ public class Fibonacci {
 
 	public static void main(String[] args) {
 		long p = Long.parseLong(JOptionPane.showInputDialog("Informe a posição da sequência de Fibonacci"));
-		System.out.println("Fibonacci: " + calcularFibonacci(p));
+		JOptionPane.showMessageDialog(null,"Fibonacci: " + calcularFibonacci(p));
 	}
 
 	public static long calcularFibonacci(long posicao){

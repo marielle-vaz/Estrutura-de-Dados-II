@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 public class Inverter {
     public static void main(String[] args) {
         long numero = Long.parseLong(JOptionPane.showInputDialog("Informe um número para ser invertido"));
-        System.out.println("Número " + numero + " invertido: " + inverterNumero(numero));
+        JOptionPane.showMessageDialog(null,"Número " + numero + " invertido: " + inverterNumero(numero));
     }
  
     public static long inverterNumero(long num) {

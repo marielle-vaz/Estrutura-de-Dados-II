@@ -7,7 +7,7 @@ public class OcorrenciaNumero {
         long numero = Long.parseLong(JOptionPane.showInputDialog("Informe uma sequência de números"));
         long digito = Long.parseLong(JOptionPane.showInputDialog("Qual dígito deseja buscar?"));
 
-        System.out.println("O dígito " + digito + " ocorre " + procurarDigito(numero, digito) + " vezes em " + numero);
+        JOptionPane.showMessageDialog(null,"O dígito " + digito + " ocorre " + procurarDigito(numero, digito) + " vezes em " + numero);
     }
 
     public static long procurarDigito(long n, long k){

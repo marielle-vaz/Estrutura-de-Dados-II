@@ -6,7 +6,7 @@ public class Fatorial {
 
 	public static void main(String[] args) {
 		long num = Long.parseLong(JOptionPane.showInputDialog("Informe um número"));
-		System.out.println("Fatorial: " + calcularFatorial(num));
+		JOptionPane.showMessageDialog(null, "Fatorial: " + calcularFatorial(num));
 	}
 
 	public static long calcularFatorial(long numero){
