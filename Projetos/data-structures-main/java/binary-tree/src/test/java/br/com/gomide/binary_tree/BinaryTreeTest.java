@@ -1,7 +1,7 @@
 package br.com.gomide.binary_tree;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
 class BinaryTreeTest {
@@ -13,7 +13,7 @@ class BinaryTreeTest {
 
     Node<Integer> rootNode = binaryTreeOps.createTree(elements);
 
-    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 right:4 (left:3 ))right:8 )");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 right:4 (left:3)) right:8)");
   }
 
   @Test
@@ -21,16 +21,16 @@ class BinaryTreeTest {
     IBinaryTree<Integer> binaryTreeOps = new BinaryTree<>();
     Node<Integer> rootNode = binaryTreeOps.createTree(6);
 
-    assertEquals(binaryTreeOps.toString(rootNode), "root:6 ");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:6");
 
     binaryTreeOps.insert(rootNode, 2);
-    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 )");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2)");
 
     binaryTreeOps.insert(rootNode, 8);
-    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 right:8 )");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 right:8)");
 
     binaryTreeOps.insert(rootNode, 1);
-    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 )right:8 )");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1) right:8)");
 
     binaryTreeOps.insert(rootNode, 1);
     assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 )right:8 )");
@@ -53,21 +53,21 @@ class BinaryTreeTest {
     Node<Integer> rootNode = binaryTreeOps.createTree(elements);
 
     assertEquals(binaryTreeOps.toString(rootNode),
-        "root:37 (left:20 (left:10 (left:5 )right:30 )right:80 (right:100 (left:90 right:180 )))");
+        "root:37 (left:20 (left:10 (left:5) right:30) right:80 (right:100 (left:90 right:180)))");
 
     binaryTreeOps.remove(rootNode, 180);
     assertEquals(binaryTreeOps.toString(rootNode),
-        "root:37 (left:20 (left:10 (left:5 )right:30 )right:80 (right:100 (left:90 )))");
+        "root:37 (left:20 (left:10 (left:5) right:30) right:80 (right:100 (left:90)))");
 
     binaryTreeOps.remove(rootNode, 80);
     assertEquals(binaryTreeOps.toString(rootNode),
-        "root:37 (left:20 (left:10 (left:5 )right:30 )right:100 (left:90 ))");
+        "root:37 (left:20 (left:10 (left:5) right:30) right:100 (left:90))");
 
     binaryTreeOps.remove(rootNode, 10);
-    assertEquals(binaryTreeOps.toString(rootNode), "root:37 (left:20 (left:5 right:30 )right:100 (left:90 ))");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:37 (left:20 (left:5 right:30) right:100 (left:90))");
 
     binaryTreeOps.remove(rootNode, 20);
-    assertEquals(binaryTreeOps.toString(rootNode), "root:37 (left:30 (left:5 )right:100 (left:90 ))");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:37 (left:30 (left:5) right:100 (left:90))");
 
     binaryTreeOps.remove(rootNode, 37);
     assertEquals(binaryTreeOps.toString(rootNode), "root:100 (left:90 (left:30 (left:5 )))");

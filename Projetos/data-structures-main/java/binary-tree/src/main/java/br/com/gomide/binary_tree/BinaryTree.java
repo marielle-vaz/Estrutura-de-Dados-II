@@ -25,12 +25,13 @@ public class BinaryTree<T extends Comparable<T>> implements IBinaryTree<T> {
   @Override
   public Integer degree(Node<T> rootNode, T nodeElement) {
     Node<T> node = getByElement(rootNode, nodeElement);
-    if (node == null) return -1;
+    if (node == null) return null; 
     int degree = 0;
     if (node.getLeft() != null) degree++;
     if (node.getRight() != null) degree++;
     return degree;
-  }
+}
+
 
   @Override
   public void insert(Node<T> rootNode, T element) {
@@ -127,30 +128,68 @@ public class BinaryTree<T extends Comparable<T>> implements IBinaryTree<T> {
 
   @Override
   public Integer calculateTreeDepth(Node<T> rootNode) {
-    if (rootNode == null) return 0;
-    return 1 + Math.max(calculateTreeDepth(rootNode.getLeft()), calculateTreeDepth(rootNode.getRight()));
+      if (rootNode == null) {
+          return -1;  
+      }
+  
+      int leftDepth = calculateTreeDepth(rootNode.getLeft());
+      int rightDepth = calculateTreeDepth(rootNode.getRight());
+  
+      return Math.max(leftDepth, rightDepth) + 1;
   }
 
   @Override
-  public Integer calculateNodeLevel(Node<T> rootNode, T nodeElement) {
+public Integer calculateNodeLevel(Node<T> rootNode, T nodeElement) {
+    if (nodeElement == null) {
+        return null;
+    }
+
     int level = 0;
     Node<T> current = rootNode;
     while (current != null) {
-      if (current.getValue().equals(nodeElement)) return level;
-      level++;
-      if (nodeElement.compareTo(current.getValue()) < 0) {
-        current = current.getLeft();
-      } else {
-        current = current.getRight();
-      }
+        if (current.getValue().equals(nodeElement)) {
+            return level;
+        }
+        level++;
+        if (nodeElement.compareTo(current.getValue()) < 0) {
+            current = current.getLeft();
+        } else {
+            current = current.getRight();
+        }
     }
     return -1;
-  }
+}
+
 
   @Override
   public String toString(Node<T> rootNode) {
-    if (rootNode == null) return "";
-    return toString(rootNode.getLeft()) + rootNode.getValue() + " " + toString(rootNode.getRight());
+      if (rootNode == null) return "";
+  
+      StringBuilder sb = new StringBuilder();
+      if (rootNode == root) {
+          sb.append("root:");
+      }
+  
+      sb.append(rootNode.getValue());
+  
+      if (rootNode.getLeft() != null || rootNode.getRight() != null) {
+          sb.append(" (");
+  
+          if (rootNode.getLeft() != null) {
+              sb.append("left:").append(toString(rootNode.getLeft()));
+          }
+  
+          if (rootNode.getRight() != null) {
+              if (rootNode.getLeft() != null) {
+                  sb.append(" ");
+              }
+              sb.append("right:").append(toString(rootNode.getRight()));
+          }
+  
+          sb.append(")");
+      }
+  
+      return sb.toString();
   }
-
+  
 }
