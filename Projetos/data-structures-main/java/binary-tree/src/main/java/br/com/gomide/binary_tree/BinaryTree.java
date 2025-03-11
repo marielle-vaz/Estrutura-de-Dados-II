@@ -65,43 +65,46 @@ public class BinaryTree<T extends Comparable<T>> implements IBinaryTree<T> {
   @Override
   public boolean remove(Node<T> rootNode, T nodeElement) {
     if (rootNode == null) return false;
+
     Node<T> parent = null;
     Node<T> current = rootNode;
 
     while (current != null && !current.getValue().equals(nodeElement)) {
-      parent = current;
-      if (nodeElement.compareTo(current.getValue()) < 0) {
-        current = current.getLeft();
-      } else {
-        current = current.getRight();
-      }
+        parent = current;
+        if (nodeElement.compareTo(current.getValue()) < 0) {
+            current = current.getLeft();
+        } else {
+            current = current.getRight();
+        }
     }
 
     if (current == null) return false;
 
     if (current.getLeft() == null && current.getRight() == null) {
-      if (parent == null) root = null;
-      else if (parent.getLeft() == current) parent.setLeft(null);
-      else parent.setRight(null);
-    } else if (current.getLeft() == null) {
-      if (parent == null) root = current.getRight();
-      else if (parent.getLeft() == current) parent.setLeft(current.getRight());
-      else parent.setRight(current.getRight());
-    } else if (current.getRight() == null) {
-      if (parent == null) root = current.getLeft();
-      else if (parent.getLeft() == current) parent.setLeft(current.getLeft());
-      else parent.setRight(current.getLeft());
+        if (parent == null) return false;
+        if (parent.getLeft() == current) parent.setLeft(null);
+        else parent.setRight(null);
+    } else if (current.getLeft() == null || current.getRight() == null) {
+        Node<T> child = (current.getLeft() != null) ? current.getLeft() : current.getRight();
+        if (parent.getLeft() == current) parent.setLeft(child);
+        else parent.setRight(child);
     } else {
-      Node<T> successor = current.getRight();
-      Node<T> successorParent = current;
-      while (successor.getLeft() != null) {
-        successorParent = successor;
-        successor = successor.getLeft();
+      Node<T> maxRight = current.getRight();
+      Node<T> maxRightParent = current;
+
+      while (maxRight.getRight() != null) {
+          maxRightParent = maxRight;
+          maxRight = maxRight.getRight();
       }
-      current.setValue(successor.getValue());
-      if (successorParent.getLeft() == successor) successorParent.setLeft(successor.getRight());
-    else successorParent.setRight(successor.getRight());
+      current.setValue(maxRight.getValue());
+
+      if (maxRightParent.getLeft() == maxRight) {
+          maxRightParent.setLeft(maxRight.getLeft());
+      } else {
+          maxRightParent.setRight(maxRight.getLeft());
+      }
     }
+
     return true;
   }
 
