@@ -33,16 +33,16 @@ class BinaryTreeTest {
     assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1) right:8)");
 
     binaryTreeOps.insert(rootNode, 1);
-    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 )right:8 )");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1) right:8)");
 
     binaryTreeOps.insert(rootNode, 4);
-    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 right:4 )right:8 )");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 right:4) right:8)");
 
     binaryTreeOps.insert(rootNode, 3);
-    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 right:4 (left:3 ))right:8 )");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 right:4 (left:3)) right:8)");
 
     binaryTreeOps.insert(rootNode, 3);
-    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 right:4 (left:3 ))right:8 )");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:6 (left:2 (left:1 right:4 (left:3)) right:8)");
   }
 
   @Test
@@ -70,7 +70,7 @@ class BinaryTreeTest {
     assertEquals(binaryTreeOps.toString(rootNode), "root:37 (left:30 (left:5) right:100 (left:90))");
 
     binaryTreeOps.remove(rootNode, 37);
-    assertEquals(binaryTreeOps.toString(rootNode), "root:100 (left:90 (left:30 (left:5 )))");
+    assertEquals(binaryTreeOps.toString(rootNode), "root:100 (left:90 (left:30 (left:5)))");
   }
 
   @Test

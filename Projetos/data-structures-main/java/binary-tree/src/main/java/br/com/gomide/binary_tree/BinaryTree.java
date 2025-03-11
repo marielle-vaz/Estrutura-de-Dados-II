@@ -36,22 +36,29 @@ public class BinaryTree<T extends Comparable<T>> implements IBinaryTree<T> {
   @Override
   public void insert(Node<T> rootNode, T element) {
     if (rootNode == null) {
-      rootNode = new Node<>();
-      rootNode.setValue(element);
-      return;
+        rootNode = new Node<>();
+        rootNode.setValue(element);
+        return;
     }
-    if (element.compareTo(rootNode.getValue()) < 0) {
+    
+    int compareResult = element.compareTo(rootNode.getValue());
+
+    if (compareResult < 0) {
         if (rootNode.getLeft() == null) {
             Node<T> newNode = new Node<>();
             newNode.setValue(element);
             rootNode.setLeft(newNode);
-        } else insert(rootNode.getLeft(), element);
-    } else {
+        } else {
+            insert(rootNode.getLeft(), element);
+        }
+    } else if (compareResult > 0) {  // Aqui impedimos a duplicação
         if (rootNode.getRight() == null) {
             Node<T> newNode = new Node<>();
             newNode.setValue(element);
             rootNode.setRight(newNode);
-        } else insert(rootNode.getRight(), element);
+        } else {
+            insert(rootNode.getRight(), element);
+        }
     }
   }
 
