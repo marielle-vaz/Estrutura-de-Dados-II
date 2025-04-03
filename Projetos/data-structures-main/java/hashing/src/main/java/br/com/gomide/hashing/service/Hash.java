@@ -12,11 +12,6 @@ public abstract class Hash<T extends Comparable<T>> implements IHashing<T> {
     return new HashTable<T>(n);
   }
 
-  /*
-   * 123
-   * 
-  */
-
   @Override
   public void insert(HashTable<T> hashTable, T[] values) {
     for (T value : values) {
