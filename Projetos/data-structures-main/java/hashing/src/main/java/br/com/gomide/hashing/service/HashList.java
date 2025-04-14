@@ -5,6 +5,7 @@ import java.util.StringJoiner;
 
 import br.com.gomide.hashing.model.HashTable;
 import br.com.gomide.hashing.model.Node;
+import br.com.gomide.hashing.model.NodeStatus;
 
 public class HashList<T extends Comparable<T>> extends Hash<T> {
 
@@ -19,6 +20,8 @@ public class HashList<T extends Comparable<T>> extends Hash<T> {
 
     Node<T> newNode = new Node<>();
     newNode.setValue(value);
+
+    newNode.setStatus(NodeStatus.BUSY);
 
     newNode.setNext(hashTable.getItems().get(position));
     hashTable.getItems().set(position, newNode);
