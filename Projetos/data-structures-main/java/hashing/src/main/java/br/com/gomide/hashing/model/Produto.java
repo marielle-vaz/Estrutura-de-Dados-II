@@ -35,7 +35,6 @@ public class Produto implements Comparable<Produto> {
 
     @Override
     public int hashCode() {
-        // Usamos somente o tipo no hashCode, pois a chave da tabela é o tipo
         return tipo.hashCode();
     }
 

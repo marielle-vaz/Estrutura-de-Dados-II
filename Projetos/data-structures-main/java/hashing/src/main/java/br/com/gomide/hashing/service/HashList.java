@@ -6,12 +6,23 @@ import java.util.StringJoiner;
 import br.com.gomide.hashing.model.HashTable;
 import br.com.gomide.hashing.model.Node;
 import br.com.gomide.hashing.model.NodeStatus;
+import br.com.gomide.hashing.model.Produto;
 
 public class HashList<T extends Comparable<T>> extends Hash<T> {
 
   private int getIndex(HashTable<T> hashTable, T value) {
-    int tableSize = hashTable.getItems().size();
-    return value.hashCode() % tableSize;
+    if (value instanceof Produto) {
+        Produto produto = (Produto) value;
+        String tipo = produto.getTipo();
+        switch (tipo) {
+            case "A":return 0;
+            case "H":return 1;
+            case "L":return 2;
+            case "V":return 3;
+            default:return 0; 
+        }
+    }
+    return Math.abs(value.hashCode() % hashTable.getItems().size());
   }
 
   @Override

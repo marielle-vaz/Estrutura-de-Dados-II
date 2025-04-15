@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         HashList<Produto> hashList = new HashList<>();
-        HashTable<Produto> hashTable = hashList.createHashTable(4); // A, H, L, V
+        HashTable<Produto> hashTable = hashList.createHashTable(4);
 
         while (true) {
             System.out.println("##########################################################");
@@ -23,7 +23,7 @@ public class Main {
             System.out.print("\nInforme uma opção: ");
 
             int option = scanner.nextInt();
-            scanner.nextLine(); // limpa o buffer
+            scanner.nextLine(); 
 
             switch (option) {
                 case 1:
@@ -79,13 +79,14 @@ public class Main {
                 case 3:
                     String[] tipos = {"A", "H", "L", "V"};
                     String[] nomes = {"Alimentação", "Higiene", "Limpeza", "Vestuário"};
-
+                
                     for (int i = 0; i < tipos.length; i++) {
                         int count = 0;
-                        Node<Produto> current = hashTable.getItems().get(i);
-                        while (current != null) {
-                            if (current.getStatus() == NodeStatus.BUSY &&
-                                    current.getValue().getTipo().equals(tipos[i])) {
+                        int index = getIndexByTipo(tipos[i]);
+                        Node<Produto> current = hashTable.getItems().get(index);
+                        
+                        while (current != null && current.getValue() != null) {
+                            if (current.getValue().getTipo().equals(tipos[i])) {
                                 count++;
                             }
                             current = current.getNext();
@@ -93,7 +94,7 @@ public class Main {
                         System.out.printf("%s - %d produto%s%n", nomes[i], count, count == 1 ? "" : "s");
                     }
                     break;
-
+                
                 case 4:
                     System.out.println("##########################################################");
                     System.out.println("                   Programa encerrado!");
