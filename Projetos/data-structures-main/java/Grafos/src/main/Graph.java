@@ -40,8 +40,9 @@ public class Graph {
                 count++;
             }
         }
-        return digraph ? count : count / 2; // em não direcionado conta duplicado
+        return count;
     }
+    
 
     public boolean isComplete() {
         int n = vertices.size();
