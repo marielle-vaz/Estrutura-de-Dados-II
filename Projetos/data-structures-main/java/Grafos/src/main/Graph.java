@@ -45,16 +45,29 @@ public class Graph {
 
     public boolean isComplete() {
         int n = vertices.size();
-        int expectedEdges = digraph ? n * (n - 1) : n * (n - 1) / 2;
-
-        // Conta apenas arestas distintas (sem considerar duplicadas nos não-dirigidos)
-        long realEdges = edges.stream()
-            .filter(e -> !e.getOrigin().equals(e.getDestination()))
-            .distinct()
-            .count();
-
-        return realEdges == expectedEdges;
+    
+        if (n <= 1) return false;
+    
+        for (Vertex v1 : vertices) {
+            for (Vertex v2 : vertices) {
+                if (v1.equals(v2)) continue; // ignora laços
+    
+                boolean hasEdge = edges.stream()
+                    .anyMatch(e -> e.getOrigin().equals(v1) && e.getDestination().equals(v2));
+    
+                if (!hasEdge) return false;
+    
+                if (!digraph) {
+                    // para grafos não direcionados, garante que (v2,v1) também não exista em duplicidade
+                    boolean hasReverseEdge = edges.stream()
+                        .anyMatch(e -> e.getOrigin().equals(v2) && e.getDestination().equals(v1));
+                    if (!hasReverseEdge) return false;
+                }
+            }
+        }
+        return true;
     }
+    
 
     public int degree(Vertex v) {
         int degree = 0;
