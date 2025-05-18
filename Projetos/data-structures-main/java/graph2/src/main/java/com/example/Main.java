@@ -11,11 +11,11 @@ public class Main {
         g.addVertex(b);
         g.addVertex(c);
 
-        g.addEdge(a, b, 1, "ab");
+        g.addEdge(a, b, 3, "ab");
         g.addEdge(b, c, 1, "bc");
-        g.addEdge(a, c, 1, "ac");
+        g.addEdge(a, c, 2, "ac");
         g.addEdge(a, a, 1, "loop");
-        g.addEdge(c, c, 1, "loop");
+        g.addEdge(c, c, 5, "loop");
         
 
         System.out.println("Laços: " + g.countLoops());

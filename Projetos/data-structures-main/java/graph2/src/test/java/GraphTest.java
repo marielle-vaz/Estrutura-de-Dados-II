@@ -74,17 +74,24 @@ public class GraphTest {
         Vertex a = new Vertex(1, "A");
         Vertex b = new Vertex(2, "B");
         Vertex c = new Vertex(3, "C");
+        Vertex d = new Vertex(4, "D");
+        Vertex e = new Vertex(5, "E");
 
         g.addVertex(a);
         g.addVertex(b);
         g.addVertex(c);
+        g.addVertex(d);
+        g.addVertex(e);
 
-        g.addEdge(a, b, 1, "ab");
+        g.addEdge(a, b, 5, "ab");
         g.addEdge(b, c, 1, "bc");
+        g.addEdge(b, d, 3, "bd");
+        g.addEdge(c, d, 1, "cd");
+        g.addEdge(d, e, 1, "de");
 
-        List<Vertex> caminho = g.findPath(a, c);
+        List<Vertex> caminho = g.findPath(a, e);
         assertNotNull(caminho);
-        assertEquals(List.of(a, b, c), caminho);
+        assertEquals(List.of(a, b, c, d, e), caminho);
     }
 
     @Test
@@ -98,9 +105,36 @@ public class GraphTest {
         g.addVertex(b);
         g.addVertex(c);
 
-        g.addEdge(a, b, 1, "ab");
+        g.addEdge(a, b, 3, "ab");
 
         List<Vertex> caminho = g.findPath(a, c);
         assertNull(caminho);
+    }
+
+    @Test
+    public void geraDOT() {
+        Graph g = new Graph(false);
+        Vertex a = new Vertex(1, "A");
+        Vertex b = new Vertex(2, "B");
+        Vertex c = new Vertex(3, "C");
+        Vertex d = new Vertex(4, "D");
+        Vertex e = new Vertex(5, "E");
+
+        g.addVertex(a);
+        g.addVertex(b);
+        g.addVertex(c);
+        g.addVertex(d);
+        g.addVertex(e);
+
+        g.addEdge(a, b, 5, "ab");
+        g.addEdge(b, c, 1, "bc");
+        g.addEdge(b, d, 3, "bd");
+        g.addEdge(c, d, 1, "cd");
+        g.addEdge(d, e, 1, "de");
+
+        System.out.println(g.toDOT());
+
+        assertNotNull(g.toDOT());
+        //assertEquals("", g.toDOT());
     }
 }

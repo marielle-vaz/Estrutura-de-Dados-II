@@ -1,7 +1,13 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
 
 public class Graph {
     private List<Vertex> vertices;
@@ -87,10 +93,11 @@ public class Graph {
     }
 
     public List<Vertex> findPath(Vertex from, Vertex to) {
-        List<Vertex> path = new ArrayList<>();
-        boolean found = dfs(from, to, path, new ArrayList<>());
-        return found ? path : null;
-    }
+    List<Vertex> path = new ArrayList<>();
+    boolean found = dijkstra(from, to, path);
+    return found ? path : null;
+}
+
 
     private boolean dfs(Vertex current, Vertex target, List<Vertex> path, List<Vertex> visited) {
         visited.add(current);
@@ -108,7 +115,60 @@ public class Graph {
 
         path.remove(path.size() - 1);
         return false;
+
+        
     }
+
+    private boolean dijkstra(Vertex start, Vertex target, List<Vertex> path) {
+        Map<Vertex, Double> distances = new HashMap<>();
+        Map<Vertex, Vertex> predecessors = new HashMap<>();
+        PriorityQueue<Vertex> queue = new PriorityQueue<>(Comparator.comparing(distances::get));
+        Set<Vertex> visited = new HashSet<>();
+
+        // Inicializa distâncias
+        for (Edge e : edges) {
+            distances.put(e.getOrigin(), Double.POSITIVE_INFINITY);
+            distances.put(e.getDestination(), Double.POSITIVE_INFINITY);
+        }
+        distances.put(start, 0.0);
+        queue.add(start);
+
+        while (!queue.isEmpty()) {
+            Vertex current = queue.poll();
+
+            if (visited.contains(current)) continue;
+            visited.add(current);
+
+            if (current.equals(target)) break;
+
+            for (Edge e : edges) {
+                if (e.getOrigin().equals(current)) {
+                    Vertex neighbor = e.getDestination();
+                    double newDist = distances.get(current) + e.getWeight();
+                    if (newDist < distances.getOrDefault(neighbor, Double.POSITIVE_INFINITY)) {
+                        distances.put(neighbor, newDist);
+                        predecessors.put(neighbor, current);
+                        queue.add(neighbor);
+                    }
+                }
+            }
+        }
+
+        // Reconstruir o caminho
+        if (!predecessors.containsKey(target) && !start.equals(target)) {
+            return false; // Caminho não encontrado
+        }
+
+        Vertex step = target;
+        while (step != null) {
+            path.add(0, step);
+            step = predecessors.get(step);
+        }
+
+        return true;
+    }
+
+
 
     public String toDOT() {
         StringBuilder sb = new StringBuilder();
