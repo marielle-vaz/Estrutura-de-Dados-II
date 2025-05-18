@@ -70,7 +70,7 @@ public class GraphTest {
 
     @Test
     public void testCaminhoExistente() {
-        Graph g = new Graph(false);
+        Graph g = new Graph(true);
         Vertex a = new Vertex(1, "A");
         Vertex b = new Vertex(2, "B");
         Vertex c = new Vertex(3, "C");
@@ -85,7 +85,7 @@ public class GraphTest {
 
         g.addEdge(a, b, 5, "ab");
         g.addEdge(b, c, 1, "bc");
-        g.addEdge(b, d, 3, "bd");
+        g.addEdge(d, b, 1, "db");
         g.addEdge(c, d, 1, "cd");
         g.addEdge(d, e, 1, "de");
 
@@ -113,7 +113,7 @@ public class GraphTest {
 
     @Test
     public void geraDOT() {
-        Graph g = new Graph(false);
+        Graph g = new Graph(true);
         Vertex a = new Vertex(1, "A");
         Vertex b = new Vertex(2, "B");
         Vertex c = new Vertex(3, "C");
@@ -128,7 +128,7 @@ public class GraphTest {
 
         g.addEdge(a, b, 5, "ab");
         g.addEdge(b, c, 1, "bc");
-        g.addEdge(b, d, 3, "bd");
+        g.addEdge(d, b, 1, "db");
         g.addEdge(c, d, 1, "cd");
         g.addEdge(d, e, 1, "de");
 
