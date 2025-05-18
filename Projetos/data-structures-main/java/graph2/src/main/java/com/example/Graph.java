@@ -28,7 +28,7 @@ public class Graph {
 
     public void addEdge(Vertex origin, Vertex destination, int weight, String label) {
         if (!vertices.contains(origin) || !vertices.contains(destination)) {
-            throw new IllegalArgumentException("Both vertices must be in the graph");
+            throw new IllegalArgumentException("Ambos os vértices devem estar no grafo");
         }
 
         edges.add(new Edge(origin, destination, weight, label));
@@ -48,7 +48,6 @@ public class Graph {
         }
         return count;
     }
-    
 
     public boolean isComplete() {
         int n = vertices.size();
@@ -74,7 +73,6 @@ public class Graph {
         }
         return true;
     }
-    
 
     public int degree(Vertex v) {
         int degree = 0;
@@ -93,11 +91,10 @@ public class Graph {
     }
 
     public List<Vertex> findPath(Vertex from, Vertex to) {
-    List<Vertex> path = new ArrayList<>();
-    boolean found = dijkstra(from, to, path);
-    return found ? path : null;
-}
-
+        List<Vertex> path = new ArrayList<>();
+        boolean found = dijkstra(from, to, path);
+        return found ? path : null;
+    }
 
     private boolean dfs(Vertex current, Vertex target, List<Vertex> path, List<Vertex> visited) {
         visited.add(current);
@@ -115,8 +112,6 @@ public class Graph {
 
         path.remove(path.size() - 1);
         return false;
-
-        
     }
 
     private boolean dijkstra(Vertex start, Vertex target, List<Vertex> path) {
@@ -154,9 +149,8 @@ public class Graph {
             }
         }
 
-        // Reconstruir o caminho
         if (!predecessors.containsKey(target) && !start.equals(target)) {
-            return false; // Caminho não encontrado
+            return false; 
         }
 
         Vertex step = target;
@@ -168,8 +162,6 @@ public class Graph {
         return true;
     }
 
-
-
     public String toDOT() {
         StringBuilder sb = new StringBuilder();
         String connector = digraph ? " -> " : " -- ";
@@ -180,7 +172,6 @@ public class Graph {
         }
 
         for (Edge e : edges) {
-            // Para grafos não-dirigidos, desenha apenas uma vez a aresta (evita duplicidade)
             if (!digraph && vertices.indexOf(e.getOrigin()) > vertices.indexOf(e.getDestination())) continue;
 
             sb.append("  ")
@@ -194,7 +185,6 @@ public class Graph {
         return sb.toString();
     }
 
-    // Getters para testes
     public List<Vertex> getVertices() { return vertices; }
     public List<Edge> getEdges() { return edges; }
     public boolean isDigraph() { return digraph; }
