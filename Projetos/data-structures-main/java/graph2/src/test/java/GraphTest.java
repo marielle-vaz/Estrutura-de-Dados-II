@@ -19,7 +19,7 @@ public class GraphTest {
 
         g.addVertex(a);
         g.addVertex(b);
-        g.addEdge(a, b, 1, "A-B");
+        g.addEdge(a, b, 1, "ab");
 
         assertEquals(2, g.getVertices().size());
         assertEquals(2, g.getEdges().size()); // Grafo não direcionado → A-B e B-A
